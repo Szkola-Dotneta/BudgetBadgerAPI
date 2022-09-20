@@ -15,5 +15,7 @@ namespace BudgetBadgerWebApi.Domain.Entities
                 _value = value;
             }
         }
+
+        public List<HouseMemberExpense> HouseMemberExpenses { get; set; } = new();
     }
 }

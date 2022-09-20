@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetBadgerWebApi.Domain", "src\BudgetBadgerWebApi.Domain\BudgetBadgerWebApi.Domain.csproj", "{CE6D848D-832D-4EC0-9472-76E1CB1CC74F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetBadgerWebApi.Domain", "src\BudgetBadgerWebApi.Domain\BudgetBadgerWebApi.Domain.csproj", "{CE6D848D-832D-4EC0-9472-76E1CB1CC74F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{155B8303-21F3-49E4-8440-83331511A1D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "test\Domain.Tests\Domain.Tests.csproj", "{C6760E72-8905-46E6-97BA-45AF397E3F81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{678B95F2-305F-4934-9F25-7D60B437D4AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,17 @@ Global
 		{CE6D848D-832D-4EC0-9472-76E1CB1CC74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE6D848D-832D-4EC0-9472-76E1CB1CC74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE6D848D-832D-4EC0-9472-76E1CB1CC74F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6760E72-8905-46E6-97BA-45AF397E3F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6760E72-8905-46E6-97BA-45AF397E3F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6760E72-8905-46E6-97BA-45AF397E3F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6760E72-8905-46E6-97BA-45AF397E3F81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE6D848D-832D-4EC0-9472-76E1CB1CC74F} = {678B95F2-305F-4934-9F25-7D60B437D4AE}
+		{C6760E72-8905-46E6-97BA-45AF397E3F81} = {155B8303-21F3-49E4-8440-83331511A1D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C0B2DCF-67AF-4771-8311-6C0096B775B5}

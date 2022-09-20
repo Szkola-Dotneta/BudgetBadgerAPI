@@ -2,11 +2,10 @@
 
 namespace BudgetBadgerWebApi.Domain.Entities
 {
-    public class HouseMember : NamedEntity
+    public class HouseMember : Account
     {
-        public byte[]? Salt { get; set; }
-        public byte[]? PasswordHash { get; set; }
         public int HouseholdId { get; set; }
         public Household Household { get; set; } = new();
+        public List<HouseMemberExpense> HouseMemberExpenses { get; set; } = new();
     }
 }
