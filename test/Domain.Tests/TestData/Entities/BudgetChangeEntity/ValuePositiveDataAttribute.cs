@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Xunit.Sdk;
 
-namespace Domain.Tests.TestData.Entities.Income
+namespace Domain.Tests.TestData.Entities.BudgetChangeEntity
 {
     internal class ValuePositiveDataAttribute : DataAttribute
     {

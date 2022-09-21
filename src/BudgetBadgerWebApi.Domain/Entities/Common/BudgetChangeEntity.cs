@@ -4,6 +4,18 @@
     {
         protected decimal _value;
 
+        public decimal Value
+        {
+            get => _value;
+            set
+            {
+                if (value <= 0m)
+                    throw new ArgumentException($"{nameof(Value)} of the {GetType().Name} can't be lower than or equal to 0");
+
+                _value = value;
+            }
+        }
+
         public string Category { get; set; } = string.Empty;
         public DateOnly OccurredAt { get; set; }
 
