@@ -3,6 +3,7 @@
     public class BudgetChangeEntity : NamedEntity
     {
         protected decimal _value;
+        private DateTime _occurredAt;
 
         public decimal Value
         {
@@ -16,9 +17,13 @@
             }
         }
 
-        public string Category { get; set; } = string.Empty;
-        public DateOnly OccurredAt { get; set; }
+        public DateTime OccurredAt
+        {
+            get => _occurredAt;
+            set => _occurredAt = value.Date;
+        }
 
+        public string Category { get; set; } = string.Empty;
         public int HouseholdId { get; set; }
         public Household Household { get; set; } = new();
     }

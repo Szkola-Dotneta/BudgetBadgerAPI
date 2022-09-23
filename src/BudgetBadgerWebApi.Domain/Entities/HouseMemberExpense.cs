@@ -1,6 +1,8 @@
-﻿namespace BudgetBadgerWebApi.Domain.Entities
+﻿using BudgetBadgerWebApi.Domain.Entities.Common;
+
+namespace BudgetBadgerWebApi.Domain.Entities
 {
-    public class HouseMemberExpense
+    public class HouseMemberExpense : BaseEntity
     {
         private double _contributionInPercentage;
 
