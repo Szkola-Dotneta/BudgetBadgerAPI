@@ -1,0 +1,7 @@
+// Run it while in Infrastructure project folder
+
+MIGRATION:
+	dotnet ef migrations add "MigrationName" --startup-project ..\BudgetBadgerWebApi.Api --output-dir Persistence\Migrations
+	
+DATABASE UPDATE:
+	dotnet ef database update --startup-project ..\BudgetBadgerWebApi.Api
