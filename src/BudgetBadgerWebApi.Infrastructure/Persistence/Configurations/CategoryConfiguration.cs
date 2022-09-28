@@ -4,14 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BudgetBadgerWebApi.Infrastructure.Persistence.Configurations
 {
-    public class IncomeConfiguration : IEntityTypeConfiguration<Income>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Income> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.Property(x => x.CreatedAt)
-                .IsRequired();
-
-            builder.Property(x => x.OccurredAt)
                 .IsRequired();
 
             builder.Property(x => x.Name)

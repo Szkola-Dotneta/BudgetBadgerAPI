@@ -23,8 +23,9 @@
             set => _occurredAt = value.Date;
         }
 
-        public string Category { get; set; } = string.Empty;
+        public int CategoryId { get; set; }
         public int HouseholdId { get; set; }
+        public Category Category { get; set; } = new();
         public Household Household { get; set; } = new();
     }
 }

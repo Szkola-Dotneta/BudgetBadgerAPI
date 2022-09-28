@@ -17,9 +17,6 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Configurations
             builder.Property(x => x.Name)
                 .IsRequired();
 
-            builder.Property(x => x.Category)
-                .IsRequired();
-
             builder.HasMany(x => x.HouseMemberExpenses)
                 .WithOne(y => y.Expense)
                 .OnDelete(DeleteBehavior.Restrict);

@@ -7,10 +7,11 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<HouseMember> HouseMembers { get; set; }
-        public DbSet<Household> Households { get; set; }
         public DbSet<Income> Incomes { get; set; }
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Household> Households { get; set; }
+        public DbSet<HouseMember> HouseMembers { get; set; }
         public DbSet<HouseMemberExpense> HouseMemberExpenses { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

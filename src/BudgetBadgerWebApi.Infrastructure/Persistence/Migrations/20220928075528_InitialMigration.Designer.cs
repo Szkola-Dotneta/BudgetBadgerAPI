@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220923095820_InitialMigration")]
+    [Migration("20220928075528_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("BudgetBadgerWebApi.Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("BudgetBadgerWebApi.Domain.Entities.Expense", b =>
                 {
                     b.Property<int>("Id")
@@ -32,9 +55,8 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -56,6 +78,8 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("HouseholdId");
 
@@ -162,9 +186,8 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -190,6 +213,8 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("HouseMemberId");
 
                     b.HasIndex("HouseholdId");
@@ -199,11 +224,19 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("BudgetBadgerWebApi.Domain.Entities.Expense", b =>
                 {
+                    b.HasOne("BudgetBadgerWebApi.Domain.Entities.Category", "Category")
+                        .WithMany("Expenses")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("BudgetBadgerWebApi.Domain.Entities.Household", "Household")
                         .WithMany("Expenses")
                         .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Household");
                 });
@@ -240,6 +273,12 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("BudgetBadgerWebApi.Domain.Entities.Income", b =>
                 {
+                    b.HasOne("BudgetBadgerWebApi.Domain.Entities.Category", "Category")
+                        .WithMany("Incomes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("BudgetBadgerWebApi.Domain.Entities.HouseMember", "HouseMember")
                         .WithMany()
                         .HasForeignKey("HouseMemberId")
@@ -252,9 +291,18 @@ namespace BudgetBadgerWebApi.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Category");
+
                     b.Navigation("HouseMember");
 
                     b.Navigation("Household");
+                });
+
+            modelBuilder.Entity("BudgetBadgerWebApi.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Expenses");
+
+                    b.Navigation("Incomes");
                 });
 
             modelBuilder.Entity("BudgetBadgerWebApi.Domain.Entities.Expense", b =>
