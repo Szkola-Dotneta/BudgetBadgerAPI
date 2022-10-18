@@ -16,4 +16,11 @@
 	  <ProjectReference Include="..\BudgetBadgerWebApi.Domain\BudgetBadgerWebApi.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Logic\Expense\Handlers\" />
+	  <Folder Include="Logic\Expense\Queries\" />
+	  <Folder Include="Mappings\Dtos\" />
+	  <Folder Include="Mappings\Profiles\" />
+	</ItemGroup>
+
 </Project>
