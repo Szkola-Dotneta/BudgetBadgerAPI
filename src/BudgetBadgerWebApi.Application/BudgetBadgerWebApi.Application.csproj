@@ -20,7 +20,7 @@
 	  <Folder Include="Logic\Category\Commands\" />
 	  <Folder Include="Logic\Expense\Queries\" />
 	  <Folder Include="Logic\Household\Commands\" />
-	  <Folder Include="Mappings\Profiles\" />
+	  <Folder Include="Logic\Income\Queries\" />
 	</ItemGroup>
 
 </Project>

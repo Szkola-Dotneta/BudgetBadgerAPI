@@ -2,27 +2,27 @@
 using BudgetBadgerWebApi.Application.Common.Exceptions;
 using BudgetBadgerWebApi.Application.Common.Interfaces;
 using BudgetBadgerWebApi.Application.Logic.Category.Queries;
-using BudgetBadgerWebApi.Application.Logic.Expense.Commands;
 using BudgetBadgerWebApi.Application.Logic.Household.Queries;
-using BudgetBadgerWebApi.Application.Mappings.Dtos.Expense;
+using BudgetBadgerWebApi.Application.Logic.Income.Commands;
+using BudgetBadgerWebApi.Application.Mappings.Dtos.Income;
 using MediatR;
 
-namespace BudgetBadgerWebApi.Application.Logic.Expense.Handlers
+namespace BudgetBadgerWebApi.Application.Logic.Income.Handlers
 {
-    public class CreateExpenseHandler : IRequestHandler<CreateExpenseCommand, ExpenseDto>
+    public class CreateIncomeHandler : IRequestHandler<CreateIncomeCommand, IncomeDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly ISender _mediator;
         private readonly IMapper _mapper;
 
-        public CreateExpenseHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
+        public CreateIncomeHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
         {
             _context = context;
             _mediator = mediator;
             _mapper = mapper;
         }
 
-        public async Task<ExpenseDto> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
+        public async Task<IncomeDto> Handle(CreateIncomeCommand request, CancellationToken cancellationToken)
         {
             if (await _mediator.Send(new DoesHouseholdExistByIdQuery(request.HouseholdId)) == false)
                 throw new EntityNotFoundException(nameof(request.HouseholdId));
@@ -30,28 +30,20 @@ namespace BudgetBadgerWebApi.Application.Logic.Expense.Handlers
             if (await _mediator.Send(new DoesCategoryExistByIdQuery(request.CategoryId)) == false)
                 throw new EntityNotFoundException(nameof(request.CategoryId));
 
-            var expense = new Domain.Entities.Expense
+            var income = new Domain.Entities.Income
             {
                 Name = request.Name,
                 Value = request.Value,
-                Status = request.Status,
                 OccurredAt = request.OccurredAt,
                 CategoryId = request.CategoryId,
-                HouseholdId = request.HouseholdId
-            };
-
-            var houseMemberExpense = new Domain.Entities.HouseMemberExpense
-            {
-                ContributionInPercentage = 1,
+                HouseholdId = request.HouseholdId,
                 HouseMemberId = request.HouseMemberId
             };
 
-            expense.HouseMemberExpenses.Add(houseMemberExpense);
-
-            await _context.Expenses.AddAsync(expense);
+            await _context.Incomes.AddAsync(income);
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<ExpenseDto>(expense);
+            return _mapper.Map<IncomeDto>(income);
         }
     }
 }
