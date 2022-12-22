@@ -2,7 +2,7 @@
 {
     public class EntityNotFoundException : Exception
     {
-        public EntityNotFoundException(string propertyName) : base($"Entity with the given {propertyName.ToLower()} could not be found.")
+        public EntityNotFoundException(string propertyName) : base($"Entity with the given {propertyName} could not be found.")
         {
         }
     }
