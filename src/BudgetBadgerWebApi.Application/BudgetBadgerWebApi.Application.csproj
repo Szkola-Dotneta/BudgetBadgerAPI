@@ -19,6 +19,7 @@
 	<ItemGroup>
 	  <Folder Include="Logic\Category\Commands\" />
 	  <Folder Include="Logic\Household\Commands\" />
+	  <Folder Include="Logic\HouseMember\Commands\" />
 	  <Folder Include="Logic\Income\Queries\" />
 	</ItemGroup>
 
