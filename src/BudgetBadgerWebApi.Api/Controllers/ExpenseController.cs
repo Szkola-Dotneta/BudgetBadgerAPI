@@ -11,6 +11,9 @@ namespace BudgetBadgerWebApi.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetExpensesAsync(int householdId)
         {
+            if (householdId != Account.HouseholdId)
+                return Forbid();
+
             var expenses = await Mediator.Send(new GetExpensesQuery(householdId));
 
             return Ok(expenses);
@@ -19,6 +22,9 @@ namespace BudgetBadgerWebApi.Api.Controllers
         [HttpGet("{expenseId}")]
         public async Task<IActionResult> GetExpenseByIdAsync(int householdId, int expenseId)
         {
+            if (householdId != Account.HouseholdId)
+                return Forbid();
+
             var expense = await Mediator.Send(new GetExpenseForGivenHouseholdByIdQuery(householdId, expenseId));
 
             return Ok(expense);
@@ -27,7 +33,10 @@ namespace BudgetBadgerWebApi.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateExpenseAsync([FromBody] CreateExpense command, int householdId)
         {
-            var expense = await Mediator.Send(command.GetCreateExpenseCommand(householdId, AccountId));
+            if (householdId != Account.HouseholdId)
+                return Forbid();
+
+            var expense = await Mediator.Send(command.GetCreateExpenseCommand(householdId, Account.Id));
 
             return Created($"{Request.Host}{Request.Path}/", expense);
         }
@@ -35,12 +44,18 @@ namespace BudgetBadgerWebApi.Api.Controllers
         [HttpPut("{expenseId}")]
         public async Task<IActionResult> UpdateExpenseAsync(int householdId, int expenseId)
         {
+            if (householdId != Account.HouseholdId)
+                return Forbid();
+
             throw new NotImplementedException();
         }
 
         [HttpDelete("{expenseId}")]
         public async Task<IActionResult> DeleteExpenseAsync(int householdId, int expenseId)
         {
+            if (householdId != Account.HouseholdId)
+                return Forbid();
+
             throw new NotImplementedException();
         }
     }
