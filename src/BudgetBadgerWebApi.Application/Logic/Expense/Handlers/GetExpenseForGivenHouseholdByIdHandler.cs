@@ -4,7 +4,6 @@ using BudgetBadgerWebApi.Application.Common.Interfaces;
 using BudgetBadgerWebApi.Application.Logic.Expense.Queries;
 using BudgetBadgerWebApi.Application.Logic.Household.Queries;
 using BudgetBadgerWebApi.Application.Mappings.Dtos.Expense;
-using BudgetBadgerWebApi.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

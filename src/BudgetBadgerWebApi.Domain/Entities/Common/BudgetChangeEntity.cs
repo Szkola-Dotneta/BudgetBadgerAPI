@@ -27,5 +27,13 @@
         public int HouseholdId { get; set; }
         public Category Category { get; set; } = new();
         public Household Household { get; set; } = new();
+
+        protected void Update(string name, decimal value, DateTime occurredAt, int categoryId)
+        {
+            Name = name;
+            Value = value;
+            OccurredAt = occurredAt;
+            CategoryId = categoryId;
+        }
     }
 }

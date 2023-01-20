@@ -42,12 +42,14 @@ namespace BudgetBadgerWebApi.Api.Controllers
         }
 
         [HttpPut("{expenseId}")]
-        public async Task<IActionResult> UpdateExpenseAsync(int householdId, int expenseId)
+        public async Task<IActionResult> UpdateExpenseAsync([FromBody] UpdateExpense command, int householdId, int expenseId)
         {
             if (householdId != Account.HouseholdId)
                 return Forbid();
 
-            throw new NotImplementedException();
+            var expense = await Mediator.Send(command.GetUpdateExpenseCommand(expenseId));
+
+            return Ok(expense);
         }
 
         [HttpDelete("{expenseId}")]

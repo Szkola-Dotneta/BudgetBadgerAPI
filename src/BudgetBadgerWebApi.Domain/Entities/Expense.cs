@@ -8,5 +8,12 @@ namespace BudgetBadgerWebApi.Domain.Entities
         public ExpenseStatusEnum Status { get; set; } = ExpenseStatusEnum.Completed;
 
         public List<HouseMemberExpense> HouseMemberExpenses { get; set; } = new();
+
+        public void Update(string name, decimal value, ExpenseStatusEnum status, DateTime occurredAt, int categoryId)
+        {
+            base.Update(name, value, occurredAt, categoryId);
+
+            Status = status;
+        }
     }
 }
