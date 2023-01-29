@@ -7,6 +7,12 @@ namespace BudgetBadgerWebApi.Api.Jwt
         public int Id { get; }
         public int HouseholdId { get; }
 
+        public Account(int id, int householdId)
+        {
+            Id = id;
+            HouseholdId = householdId;
+        }
+
         public Account(List<Claim> claims)
         {
             if (claims == null)

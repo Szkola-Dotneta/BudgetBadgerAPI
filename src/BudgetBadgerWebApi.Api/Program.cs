@@ -23,7 +23,7 @@ namespace BudgetBadgerWebApi.Api
                 options.Filters.Add<ModelStateValidationFilterAttribute>();
                 options.Filters.Add<WrapResponseFilter>();
             })
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
 
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

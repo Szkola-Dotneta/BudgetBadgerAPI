@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BudgetBadgerWebApi.Infrastructure\BudgetBadgerWebApi.Infrastructure.csproj" />
   </ItemGroup>
 
