@@ -7,7 +7,7 @@ namespace BudgetBadgerWebApi.Api.Controllers.Common
 {
     public class ApiControllerBase : ControllerBase
     {
-        private ISender _mediator;
+        private ISender? _mediator;
         //protected Account Account => new(User.Claims.ToList());
         protected Account Account => new(1, 1);
 

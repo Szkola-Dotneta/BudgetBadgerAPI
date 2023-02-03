@@ -1,5 +1,6 @@
 ﻿using BudgetBadgerWebApi.Api.ActionParameters.Expense;
 using BudgetBadgerWebApi.Api.Controllers.Common;
+using BudgetBadgerWebApi.Application.Logic.Expense.Commands;
 using BudgetBadgerWebApi.Application.Logic.Expense.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,7 +59,9 @@ namespace BudgetBadgerWebApi.Api.Controllers
             if (householdId != Account.HouseholdId)
                 return Forbid();
 
-            throw new NotImplementedException();
+            await Mediator.Send(new DeleteExpenseCommand(expenseId));
+
+            return NoContent();
         }
     }
 }

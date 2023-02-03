@@ -12,6 +12,6 @@ namespace BudgetBadgerWebApi.Application.Logic.Household.Handlers
         public DoesHouseholdExistByIdHandler(IApplicationDbContext context) => _context = context;
 
         public async Task<bool> Handle(DoesHouseholdExistByIdQuery request, CancellationToken cancellationToken)
-            => await _context.Households.AnyAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+            => await _context.Households.AnyAsync(x => x.Id == request.Id && x.Deleted == false, cancellationToken: cancellationToken);
     }
 }

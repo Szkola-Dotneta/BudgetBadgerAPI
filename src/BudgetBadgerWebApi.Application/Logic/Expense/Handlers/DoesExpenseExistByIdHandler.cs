@@ -12,6 +12,6 @@ namespace BudgetBadgerWebApi.Application.Logic.Expense.Handlers
         public DoesExpenseExistByIdHandler(IApplicationDbContext context) => _context = context;
 
         public async Task<bool> Handle(DoesExpenseExistByIdQuery request, CancellationToken cancellationToken)
-            => await _context.Expenses.AnyAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+            => await _context.Expenses.AnyAsync(x => x.Id == request.Id && x.Deleted == false, cancellationToken: cancellationToken);
     }
 }

@@ -2,6 +2,7 @@ using BudgetBadgerWebApi.Api.Filters;
 using BudgetBadgerWebApi.Application;
 using BudgetBadgerWebApi.Infrastructure;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
@@ -23,8 +24,9 @@ namespace BudgetBadgerWebApi.Api
                 options.Filters.Add<ModelStateValidationFilterAttribute>();
                 options.Filters.Add<WrapResponseFilter>();
             })
-                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             builder.Services.Configure<ApiBehaviorOptions>(options =>

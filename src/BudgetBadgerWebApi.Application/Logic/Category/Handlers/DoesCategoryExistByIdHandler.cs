@@ -12,6 +12,6 @@ namespace BudgetBadgerWebApi.Application.Logic.Category.Handlers
         public DoesCategoryExistByIdHandler(IApplicationDbContext context) => _context = context;
 
         public async Task<bool> Handle(DoesCategoryExistByIdQuery request, CancellationToken cancellationToken)
-            => await _context.Categories.AnyAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+            => await _context.Categories.AnyAsync(x => x.Id == request.Id && x.Deleted == false, cancellationToken: cancellationToken);
     }
 }
