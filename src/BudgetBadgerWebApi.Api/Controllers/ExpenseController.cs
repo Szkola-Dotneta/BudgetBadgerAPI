@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetBadgerWebApi.Api.Controllers
 {
-    [Route("webapi/houseHolds/{householdId}/expenses")]
+    [Route("api/houseHolds/{householdId}/expenses")]
     public class ExpenseController : ApiControllerBase
     {
         [HttpGet]

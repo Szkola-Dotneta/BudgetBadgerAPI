@@ -27,7 +27,7 @@ namespace BudgetBadgerWebApi.Application.Logic.Expense.Handlers
             if (await _mediator.Send(new DoesHouseholdExistByIdQuery(request.HouseholdId)) == false)
                 throw new EntityNotFoundException(nameof(request.HouseholdId));
 
-            var expense = await _context.Expenses.Where(x => x.HouseholdId == request.HouseholdId && x.Id == request.ExpenseId)
+            var expense = await _context.Expenses.Where(x => x.HouseholdId == request.HouseholdId && x.Id == request.ExpenseId && x.Deleted == false)
                 .Include(x => x.Category)
                 .Include(x => x.Household)
                 .Include(x => x.HouseMemberExpenses)
