@@ -11,7 +11,7 @@ namespace BudgetBadgerWebApi.Domain.Entities
 
         public void Update(string name, decimal value, ExpenseStatusEnum status, DateTime occurredAt, int categoryId)
         {
-            base.Update(name, value, occurredAt, categoryId);
+            Update(name, value, occurredAt, categoryId);
 
             Status = status;
         }

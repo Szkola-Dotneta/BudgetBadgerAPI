@@ -11,13 +11,11 @@ namespace BudgetBadgerWebApi.Application.Logic.Expense.Handlers
     public class UpdateExpenseHandler : IRequestHandler<UpdateExpenseCommand, ExpenseDto>
     {
         private readonly IApplicationDbContext _context;
-        private readonly ISender _mediator;
         private readonly IMapper _mapper;
 
         public UpdateExpenseHandler(IApplicationDbContext context, ISender mediator, IMapper mapper)
         {
             _context = context;
-            _mediator = mediator;
             _mapper = mapper;
         }
 

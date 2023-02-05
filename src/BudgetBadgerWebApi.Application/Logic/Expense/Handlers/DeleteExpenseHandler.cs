@@ -19,10 +19,10 @@ namespace BudgetBadgerWebApi.Application.Logic.Expense.Handlers
 
         public async Task<Unit> Handle(DeleteExpenseCommand request, CancellationToken cancellationToken)
         {
-            if (await _mediator.Send(new DoesExpenseExistByIdQuery(request.Id)))
-                throw new EntityNotFoundException(nameof(request.Id));
+            if (await _mediator.Send(new DoesExpenseExistByIdQuery(request.ExpenseId)))
+                throw new EntityNotFoundException(nameof(request.ExpenseId));
 
-            var expense = new Domain.Entities.Expense { Id = request.Id };
+            var expense = new Domain.Entities.Expense { Id = request.ExpenseId };
             _context.Expenses.Attach(expense);
 
             expense.Deleted = true;

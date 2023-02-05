@@ -1,6 +1,6 @@
-﻿using BudgetBadgerWebApi.Api.ActionParameters.Expense;
-using BudgetBadgerWebApi.Api.ActionParameters.Income;
+﻿using BudgetBadgerWebApi.Api.ActionParameters.Income;
 using BudgetBadgerWebApi.Api.Controllers.Common;
+using BudgetBadgerWebApi.Application.Logic.Income.Commands;
 using BudgetBadgerWebApi.Application.Logic.Income.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +51,17 @@ namespace BudgetBadgerWebApi.Api.Controllers
             var income = await Mediator.Send(command.GetUpdateIncomeCommand(incomeId));
 
             return Ok(income);
+        }
+
+        [HttpDelete("{incomeId}")]
+        public async Task<IActionResult> DeleteIncomeAsync(int householdId, int incomeId)
+        {
+            if (householdId != Account.HouseholdId)
+                return Forbid();
+
+            await Mediator.Send(new DeleteIncomeCommand(incomeId));
+
+            return NoContent();
         }
     }
 }
