@@ -1,6 +1,5 @@
 ﻿using BudgetBadgerWebApi.Domain.Entities.Common;
 using Domain.Tests.TestData.Entities.BudgetChangeEntity;
-using FluentAssertions;
 
 namespace Domain.Tests.UnitTests.Entities
 {

@@ -1,6 +1,5 @@
 ﻿using BudgetBadgerWebApi.Domain.Entities;
 using Domain.Tests.TestData.Entities.HouseMemberExpense;
-using FluentAssertions;
 
 namespace Domain.Tests.UnitTests.Entities
 {
