@@ -9,46 +9,46 @@ using FluentValidation.TestHelper;
 namespace Api.Tests.Validators.UnitTests.Expense
 {
     [Trait("Unit tests", "Validators")]
-    public class CreateExpenseValidatorNegativeTests : ValidatorTestsBase<CreateExpenseValidator>
+    public class CreateExpenseValidatorPositiveTests : ValidatorTestsBase<CreateExpenseValidator>
     {
         [Theory]
-        [EntityIncorrectNameData]
-        public void Should_Fail_Validation_For_Name(string name)
+        [EntityCorrectNameData]
+        public void Should_Pass_Validation_For_Name(string name)
         {
             var model = new CreateExpense { Name = name, Value = 100m, OccurredAt = DateTime.UtcNow.Date, Status = ExpenseStatusEnum.Completed, CategoryId = 1 };
             var result = validator.TestValidate(model);
 
-            result.ShouldHaveValidationErrorFor(m => m.Name);
+            result.ShouldNotHaveValidationErrorFor(m => m.Name);
         }
 
         [Theory]
-        [BudgetChangeEntityInorrectValueData]
-        public void Should_Fail_Validation_For_Value(decimal value)
+        [BudgetChangeEntityCorrectValueData]
+        public void Should_Pass_Validation_For_Value(decimal value)
         {
             var model = new CreateExpense { Name = "test", Value = value, OccurredAt = DateTime.UtcNow.Date, Status = ExpenseStatusEnum.Completed, CategoryId = 1 };
             var result = validator.TestValidate(model);
 
-            result.ShouldHaveValidationErrorFor(m => m.Value);
+            result.ShouldNotHaveValidationErrorFor(m => m.Value);
         }
 
         [Theory]
-        [BudgetChangeEntityIncorrectOccurredAtDateData]
-        public void Should_Fail_Validation_For_OccurredAt(DateTime occurredAt)
+        [BudgetChangeEntityCorrectOccurredAtDateData]
+        public void Should_Pass_Validation_For_OccurredAt(DateTime occurredAt)
         {
             var model = new CreateExpense { Name = "test", Value = 100m, OccurredAt = occurredAt, Status = ExpenseStatusEnum.Completed, CategoryId = 1 };
             var result = validator.TestValidate(model);
 
-            result.ShouldHaveValidationErrorFor(m => m.OccurredAt);
+            result.ShouldNotHaveValidationErrorFor(m => m.OccurredAt);
         }
 
         [Theory]
-        [ExpenseIncorrectStatusData]
-        public void Should_Fail_Validation_For_Status(ExpenseStatusEnum status)
+        [ExpenseCorrectStatusData]
+        public void Should_Pass_Validation_For_Status(ExpenseStatusEnum status)
         {
             var model = new CreateExpense { Name = "test", Value = 100m, OccurredAt = DateTime.UtcNow.Date, Status = status, CategoryId = 1 };
             var result = validator.TestValidate(model);
 
-            result.ShouldHaveValidationErrorFor(m => m.Status);
+            result.ShouldNotHaveValidationErrorFor(m => m.Status);
         }
     }
 }
