@@ -50,5 +50,15 @@ namespace Api.Tests.Validators.UnitTests.Expense
 
             result.ShouldNotHaveValidationErrorFor(m => m.Status);
         }
+
+        [Theory]
+        [EntityCorrectIdData]
+        public void Should_Pass_Validation_For_CategoryId(int categoryId)
+        {
+            var model = new CreateExpense { Name = "test", Value = 100m, OccurredAt = DateTime.UtcNow.Date, Status = ExpenseStatusEnum.Completed, CategoryId = categoryId };
+            var result = validator.TestValidate(model);
+
+            result.ShouldNotHaveValidationErrorFor(m => m.CategoryId);
+        }
     }
 }
