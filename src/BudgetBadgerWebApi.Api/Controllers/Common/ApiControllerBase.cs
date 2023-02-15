@@ -1,5 +1,4 @@
 ﻿using BudgetBadgerWebApi.Api.Jwt;
-using BudgetBadgerWebApi.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
