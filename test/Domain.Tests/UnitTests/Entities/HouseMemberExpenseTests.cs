@@ -9,7 +9,7 @@ namespace Domain.Tests.UnitTests.Entities
     {
         [Theory]
         [ContributionInPercentageNegativeData]
-        public void ContributionInPercentage_Should_Throw_ArgumentOutOfRangeException_For_Value_Otside_0_To_1_Range(double contributionInPercentageTestValue)
+        public void ContributionInPercentage_Should_Throw_ArgumentOutOfRangeException_For_Value_Outside_0_To_1_Range(double contributionInPercentageTestValue)
         {
             HouseMemberExpense houseMemberExpense = new();
 
