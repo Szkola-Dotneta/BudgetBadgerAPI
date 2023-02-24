@@ -1,5 +1,10 @@
+using BudgetBadgerWebApi.Api.Filters;
 using BudgetBadgerWebApi.Application;
 using BudgetBadgerWebApi.Infrastructure;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace BudgetBadgerWebApi.Api
 {
@@ -13,7 +18,22 @@ namespace BudgetBadgerWebApi.Api
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure(builder.Configuration);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<WebApiExceptionFilterAttribute>();
+                options.Filters.Add<ModelStateValidationFilterAttribute>();
+                options.Filters.Add<WrapResponseFilter>();
+            })
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -23,15 +43,13 @@ namespace BudgetBadgerWebApi.Api
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

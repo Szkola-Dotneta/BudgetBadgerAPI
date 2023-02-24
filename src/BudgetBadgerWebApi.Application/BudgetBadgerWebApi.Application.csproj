@@ -16,4 +16,10 @@
 	  <ProjectReference Include="..\BudgetBadgerWebApi.Domain\BudgetBadgerWebApi.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Logic\Category\Commands\" />
+	  <Folder Include="Logic\Household\Commands\" />
+	  <Folder Include="Logic\HouseMember\Commands\" />
+	</ItemGroup>
+
 </Project>
